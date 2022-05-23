@@ -60,8 +60,8 @@ function render(data){                                                          
 
   // Axis
   var yAxis = d3.axisLeft()                                                     // Function create axis
-    .scale(yScale)
-    .tickFormat((d) => formatInteger(d))                                                              // Axis based on yScale
+    .scale(yScale)                                                              // Axis based on yScale
+    .tickFormat((d) => formatInteger(d))                                        // Formatting tick for improved readibility
 
   var xAxis = d3.axisBottom()                                                   // function create axis
     .scale(xScale)                                                              // Axis based on xScale
@@ -69,19 +69,19 @@ function render(data){                                                          
 
 
 
-  var area = d3.area()
-    .x(function(d, i) {return xScale(d.Year); })                                // set the x values for the line generator
-    .y0(yScale(0))
-    .y1(function(d) {return yScale(d.Indonesia); })                             // set the y values for the line generator
+  var area = d3.area()                                                          // function to create area chart
+    .x(function(d, i) {return xScale(d.Year); })                                // set the x values for the area generator
+    .y0(yScale(0))                                                              // set line on x axis
+    .y1(function(d) {return yScale(d.Indonesia); })                             // set the y values for the area generator
 
   svg
-    .append('g')                                                                // Add group element to place line in
-    .classed('line', true)                                                      // Give classes
-    .append('path')                                                             // Select all path elements to draw bars with
-    .attr("fill", "#90e0ef")                                                       // Remove fill
-    .attr("stroke", "#0096c7")                                                    // Path color
+    .append('g')                                                                // Add group element to place area in
+    .classed('area', true)                                                      // Give classes
+    .append('path')                                                             // Select all path elements to draw area line with
+    .attr("fill", "#90e0ef")                                                    // Add fill
+    .attr("stroke", "#0096c7")                                                  // Path color
     .attr("stroke-width", 1.5)                                                  // Width path
-    .attr("d", area(data))
+    .attr("d", area(data))                                                      // call function to create area cjart
     ;
 
   svg
